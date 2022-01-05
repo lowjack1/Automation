@@ -8,10 +8,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
-from PIL import Image
-import urllib.request
+# from PIL import Image
+# import urllib.request
 import sys
-import pytesseract
+# import pytesseract
 
 xlrd.xlsx.ensure_elementtree_imported(False, None)
 xlrd.xlsx.Element_has_iter = True
