@@ -63,7 +63,7 @@ def updateFunc(row, tab_id):
 		button = driver.find_element(By.XPATH, '//*[@id="formAccess"]/div[1]/div/div/button')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
-		driver.find_element(By.XPATH, '//*[@id="MultipleChoice-multiple-id"]').send_keys(validation_status)
+		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[2]/li/div[1]/select').send_keys(validation_status)
 		button = driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/ul[3]/li/div[1]/div[2]/div/button')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
