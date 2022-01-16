@@ -12,8 +12,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 import sys
 
-xlrd.xlsx.ensure_elementtree_imported(False, None)
-xlrd.xlsx.Element_has_iter = True
+# xlrd.xlsx.ensure_elementtree_imported(False, None)
+# xlrd.xlsx.Element_has_iter = True
 
 driver = webdriver.Chrome(executable_path="./chromedriver")
 driver.maximize_window()
@@ -24,9 +24,9 @@ wb = xlrd.open_workbook(file_path)
 sheet = wb.sheet_by_index(0)
 
 
-def check_exists_by_xpath(xpath):
+def check_exists_by_xpath():
     try:
-        button = driver.find_element(By.XPATH, xpath)
+        button = driver.find_element(By.CSS_SELECTOR, 'button[elname="submit"]')
         if button.text.lower().strip() == "submit":
         	return True
         return False
@@ -59,30 +59,30 @@ def updateFunc(row, tab_id):
 		date_str = date_obj.strftime("%d-%b-%Y")
 
 
-		driver.find_element(By.XPATH, '//*[@id="Number-li"]/div[1]/span[1]/input').send_keys(enrollment_no)
-		button = driver.find_element(By.XPATH, '//*[@id="formAccess"]/div[1]/div/div/button')
+		driver.find_element(By.NAME, 'Number').send_keys(enrollment_no)
+		button = driver.find_element(By.CSS_SELECTOR, 'button[elname="next"]')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[2]/li/div[1]/select').send_keys(validation_status)
+		driver.find_element(By.ID, 'MultipleChoice-multiple-id').send_keys(validation_status)
 		button = driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/ul[3]/li/div[1]/div[2]/div/button')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[3]/li/div/span[1]/div/input').send_keys(date_str)
+		driver.find_element(By.NAME, 'Date').send_keys(date_str)
 		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/ul[4]/li/div[1]/div[2]/div/button').click()
 
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[4]/li[1]/div[1]/span[1]/input').send_keys(unique_no)
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[4]/li[2]/div[1]/div[1]/select').send_keys(officer_name)
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[4]/li[3]/div[1]/div[1]/select').send_keys(tl_name)
+		driver.find_element(By.NAME, 'Number1').send_keys(unique_no)
+		driver.find_element(By.NAME, 'Dropdown').send_keys(officer_name)
+		driver.find_element(By.NAME, 'Dropdown1').send_keys(tl_name)
 		button = driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/ul[5]/li/div[1]/div[2]/div/button')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[5]/li[1]/div[1]/div[1]/select').send_keys(location)
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[5]/li[2]/div[1]/div[1]/select').send_keys(capturing)
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[5]/li[3]/div[1]/div[1]/select').send_keys(check_list)
-		driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/div[1]/ul[5]/li[4]/div[1]/div[1]/select').send_keys(caused_list)
+		driver.find_element(By.NAME, 'Dropdown2').send_keys(location)
+		driver.find_element(By.NAME, 'Dropdown3').send_keys(capturing)
+		driver.find_element(By.NAME, 'Dropdown4').send_keys(check_list)
+		driver.find_element(By.NAME, 'Dropdown5').send_keys(caused_list)
 
 
-		while check_exists_by_xpath('//*[@id="formAccess"]/div[1]/div[2]/div[2]/button'):
+		while check_exists_by_xpath():
 			time.sleep(1)
 
 
