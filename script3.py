@@ -9,7 +9,9 @@ from selenium.webdriver.common.keys import Keys
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException        
-
+from time import sleep
+import selenium.webdriver.support.expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import sys
 
 # xlrd.xlsx.ensure_elementtree_imported(False, None)
@@ -63,6 +65,7 @@ def updateFunc(row, tab_id):
 		button = driver.find_element(By.CSS_SELECTOR, 'button[elname="next"]')
 		ActionChains(driver).move_to_element(button).click(button).perform()
 
+		WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'MultipleChoice-multiple-id')))
 		driver.find_element(By.ID, 'MultipleChoice-multiple-id').send_keys(validation_status)
 		button = driver.find_element(By.XPATH, '/html/body/div[2]/div[1]/div[2]/div/form/div[2]/ul[3]/li/div[1]/div[2]/div/button')
 		ActionChains(driver).move_to_element(button).click(button).perform()
